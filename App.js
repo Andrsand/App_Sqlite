@@ -127,11 +127,11 @@ export default function App() {
           setNames(existingNames);
           setCurrentName(undefined);
         },
-        (txObj, error) => console.log(error)
+        (txObj, error) => console.log(error) // запись ошибок в консоль
       );
     });
   };
-
+  // Функция удаления имени
   const deleteName = (id) => {
     db.transaction(tx => {
       tx.executeSql('DELETE FROM names WHERE id = ?', [id],
@@ -145,7 +145,7 @@ export default function App() {
       );
     });
   };
-
+  // функция обновления имени
   const updateName = (id) => {
     db.transaction(tx => {
       tx.executeSql('UPDATE names SET name = ? WHERE id = ?', [currentName, id],
@@ -168,8 +168,8 @@ export default function App() {
       return (
         <View key={index} style={styles.row}>
           <Text>{name.name}</Text>
-          <Button title='Delete' onPress={() => deleteName(name.id)} />
-          <Button title='Update' onPress={() => updateName(name.id)} />
+          <Button title='Delete' onPress={() => deleteName(name.id)} />  {/* кнопка удаления имени*/}
+          <Button title='Update' onPress={() => updateName(name.id)} /> {/* кнопка обновление имени */}
         </View>
       );
     });
